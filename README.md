@@ -1,2 +1,4 @@
 # ipfs-cloud
-Using IPFS to build cloud storage and cloud Web services.
+Using IPFS to build Database as a Service
+
+Document is in progress
