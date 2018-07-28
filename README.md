@@ -184,6 +184,8 @@ FiCoin 的发行量是无上限的。
 
 ### 完整的 Filego 运行流程图
 
+![flowchart](https://usercontents.authing.cn/filego/cdn/flowchart/v1/filego-flowchart.jpg)
+
 ## 总结
 
 Filego 是一个使用区块链和 IPFS 搭建而成的去中心化文件存储网络，在矿工接受了合约后必须不间断的向网络内所有节点发送存储可用性证明（Proofs of Storage, PoST），而用户需要为上传／下载和存储时使用的带宽和硬盘支付FiCoin，其中的 0.001% 会划分给 FiFunds基金，剩下的划分给存储矿工和记账矿工。
