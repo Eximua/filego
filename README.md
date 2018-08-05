@@ -6,8 +6,6 @@
 
 <h3 align="center">Filego - A decentralized storage platform.</h3>
 
-Welcome to Filego!Filego aims to decentralize all cloud storage.
-
 ## Table of Contents
 
 - [Overview](#overview)
