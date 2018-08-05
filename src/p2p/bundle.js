@@ -33,24 +33,25 @@ class FilegoBundles extends libp2p {
 
           connEncryption: [ SECIO ],
 
-        //   peerDiscovery: [ MulticastDNS ],
+          peerDiscovery: [ MulticastDNS ],
 
           dht: kadDHT
         },
         config: {
-        //   peerDiscovery: {
-        //     bootstrap: {
-        //       interval: 2000,
-        //       enabled: true
-        //     }
-        //   },
+          peerDiscovery: {
+            bootstrap: {
+              interval: 2000,
+              enabled: true
+            }
+          },
 
           dht: {
             kBucketSize: 20
           },
 
           EXPERIMENTAL: {
-            dht: true
+            dht: true,
+            pubsub: true
           }          
         }        
       }
