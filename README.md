@@ -1,7 +1,7 @@
 # 
 
 <h1 align="center">
-  <a href="libp2p.io"><img width="250" src="https://usercontents.authing.cn/filego/cdn/images/filego_blue.svg" alt="libp2p hex logo" /></a>
+  <a href="https://filego.io"><img width="350" src="https://usercontents.authing.cn/filego/cdn/images/filego_blue.svg" alt="filego svg logo" /></a>
 </h1>
 
 <h3 align="center">Filego - A decentralized storage platform.</h3>
