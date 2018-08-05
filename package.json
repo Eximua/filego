@@ -1,0 +1,34 @@
+{
+  "name": "filego",
+  "version": "0.0.1",
+  "description": "Filego is a decentralized storage platform secured by blockchain technology. ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eximua/filego.git"
+  },
+  "keywords": [
+    "filego",
+    "ipfs",
+    "blockchain",
+    "cloud",
+    "storagem",
+    "decentralized"
+  ],
+  "author": "Eximua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eximua/filego/issues"
+  },
+  "homepage": "https://github.com/Eximua/filego#readme",
+  "dependencies": {
+    "@nodeutils/defaults-deep": "^1.1.0",
+    "async": "^2.6.1",
+    "libp2p": "^0.23.0",
+    "libp2p-tcp": "^0.12.1",
+    "peer-info": "^0.14.1"
+  }
+}
