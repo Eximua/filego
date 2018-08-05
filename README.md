@@ -1,23 +1,19 @@
-# Filego - A decentralized storage platform
+# 
 
-* ``Version: 1.0``
-* ``Author: Eximua Labs``
-* ``Email: xieyang@dodora.cn``
-* ``Date: July 22, 2018``
+<h1 align="center">
+  <a href="libp2p.io"><img width="250" src="https://usercontents.authing.cn/filego/cdn/images/filego_blue.svg" alt="libp2p hex logo" /></a>
+</h1>
 
-## 摘要
+<h3 align="center">Filego - A decentralized storage platform.</h3>
 
-Filego 是一个去中心化云存储平台，我们通过 IPFS 技术连接世界范围内的空闲存储设备，同时利用区块链为设备提供方（以下简称矿工）、用户和开发者提供经济价值。
+Welcome to Filego!Filego aims to decentralize all cloud storage.
 
-使用 Filego 能使存储系统在没有中介的情况下运行。与传统云存储厂商相比，我们通过智能合约保障存储交易，提供稳定、安全且便宜的硬盘空间租赁方案，保证每一个人都能买得起。并且，没有任何一方能审查 Filego 上的内容，Filego 将真正做到**自己的数据归自己**。
+## Table of Contents
 
-无论是个人还是企业，都可以以矿工或用户的身份加入 Filego 的生态圈，生态圈内的所有交易都使用 FiCoin（Filego的数字货币，简称 FIC）。
+- [Overview](#overview)
+- [How Filego Works](#how-filego-works)
 
-Filego 是由 ``File`` 和 ``Ego`` 两个单词组成的合成词，``Ego`` 的中文翻译是 ``自我意识``，我们的目标是让存储在 Filego 之上的文件拥有充分的 ``自我意识``，从而确保文件的自主权。
-
-长期目标是希望能够成为下一代互联网存储的基础设施。
-
-## 项目背景
+## Overview
 
 传统云存储厂商（七牛云、百度云盘等）都是大型第三方机构，这种系统易受各种安全威胁，如中间人攻击、应用程序漏洞等。此外，由于托管在第三方服务器上，一旦受到攻击，容易暴露消费者隐私和企业私密数据。而且，大多存储服务依赖于相同的基础设施，一旦发生故障，往往波及范围广。另外一个潜在的威胁是监管，第三方服务往往会在上传时审查你的内容并过滤掉一些他们认为的“非法内容”，从而对用户、企业和社会的权益造成侵犯。
 
@@ -25,7 +21,7 @@ Filego 是由 ``File`` 和 ``Ego`` 两个单词组成的合成词，``Ego`` 的�
 
 本文详述了包含去中心化存储和加密货币一套系统的实现方案。
 
-## 基本架构
+## How Filego Works
 
 Filego 包含三方面的基础架构，分别是矿机服务（服务矿工和开发者）、Filego Hub（Filego 客户端）以及加密货币（FiCoin）。
 
@@ -181,10 +177,6 @@ FiCoin 有一个基金账户 ``FiFunds``，用来存放给予创始团队的数�
 ### FiCoin 发行量
 
 FiCoin 的发行量是无上限的。
-
-### 完整的 Filego 运行流程图
-
-![flowchart](https://usercontents.authing.cn/filego/cdn/flowchart/v1/filego-flowchart.jpg)
 
 ## 总结
 
