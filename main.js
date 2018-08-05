@@ -1,7 +1,8 @@
 const pull = require('pull-stream');
 const parallel = require('async/parallel');
 const createNode = require('./src/p2p/createNode');
-  
+const CID = require('cids')
+
 function printAddrs (node, number) {
     console.log('node %s is listening on:', number)
     node.peerInfo.multiaddrs.forEach((ma) => console.log(ma.toString()))
@@ -49,12 +50,26 @@ parallel([
       (cb) => setTimeout(cb, 300)
     ], (err) => {
       if (err) { throw err }
+
+        const cid = new CID('QmTp9VkYvnHyrqKQuFPiuZkiX9gPcqj6x5LJ1rmWuSySnL')
+
+        node1.contentRouting.provide(cid, (err) => {
+            if (err) { throw err }
+    
+            console.log('Node %s is providing %s', node1.peerInfo.id.toB58String(), cid.toBaseEncodedString())
+    
+            node3.contentRouting.findProviders(cid, 5000, (err, providers) => {
+            if (err) { throw err }
+    
+            console.log('Found provider:', providers[0].id.toB58String())
+            })
+        })      
   
-      node1.peerRouting.findPeer(node3.peerInfo.id, (err, peer) => {
-        if (err) { throw err }
-  
-        console.log('Found it, multiaddrs are:')
-        peer.multiaddrs.forEach((ma) => console.log(ma.toString()))
-      })
+        // node1.peerRouting.findPeer(node3.peerInfo.id, (err, peer) => {
+        //     if (err) { throw err }
+    
+        //     console.log('Found it, multiaddrs are:')
+        //     peer.multiaddrs.forEach((ma) => console.log(ma.toString()))
+        // })
     })
   })
