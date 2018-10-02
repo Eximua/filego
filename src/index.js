@@ -12,10 +12,10 @@ const logger = log4js.getLogger();
 logger.level = 'debug';
 
 levelDB.put('TEST_IS_LEVELDB_AVAILABLE', 'YES', function (err) {
-    if (err) return logger.debug('Ooops!', err);
+    if (err) return logger.fatal('Ooops!', err);
   
     levelDB.get('TEST_IS_LEVELDB_AVAILABLE', function (err, value) {
-      if (err) return logger.debug('Ooops!', err);
+      if (err) return logger.fatal('Ooops!', err);
   
       if (value === 'YES') {
         logger.debug('Level DB is available.');
