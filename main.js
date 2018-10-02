@@ -2,7 +2,7 @@ const pull = require('pull-stream');
 const parallel = require('async/parallel');
 const series = require('async/series');
 const createNode = require('./src/p2p/createNode');
-const CID = require('cids')
+const CID = require('cids');
 
 function printAddrs (node, number) {
     console.log('node %s is listening on:', number)
@@ -50,7 +50,7 @@ parallel([
       ], (err) => {
         if (err) { throw err }
 
-        console.log('start subing');
+        console.log('start subscribing');
     
         // Subscribe to the topic 'news'
         node1.pubsub.subscribe('news',
@@ -66,6 +66,7 @@ parallel([
             }, 1000)
           }
         )
+
       })
     
   
