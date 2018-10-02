@@ -3,4 +3,4 @@ const configs = require('./configs');
 
 const db = level(configs.levelDB.dbPath);
 
-exports.default = db;
+module.exports = db;

@@ -3,72 +3,56 @@ const parallel = require('async/parallel');
 const series = require('async/series');
 const createNode = require('./p2p/createNode');
 const CID = require('cids');
-const levelDB = require('./levelDB').default;
 
-// 2) Put a key & value
-levelDB.put('name', 'Level', function (err) {
-    if (err) return console.log('Ooops!', err) // some kind of I/O error
+const levelDB = require('./levelDB');
+const ipfs = require('./ipfs/startNode');
+
+const log4js = require('log4js');
+const logger = log4js.getLogger();
+logger.level = 'debug';
+
+levelDB.put('TEST_IS_LEVELDB_AVAILABLE', 'YES', function (err) {
+    if (err) return logger.debug('Ooops!', err);
   
-    // 3) Fetch by key
-    levelDB.get('name', function (err, value) {
-      if (err) return console.log('Ooops!', err) // likely the key was not found
+    levelDB.get('TEST_IS_LEVELDB_AVAILABLE', function (err, value) {
+      if (err) return logger.debug('Ooops!', err);
   
-      // Ta da!
-      console.log('name=' + value)
-    })
-  });
+      if (value === 'YES') {
+        logger.debug('Level DB is available.');
 
-function printAddrs (node, number) {
-    console.log('node %s is listening on:', number)
-    node.peerInfo.multiaddrs.forEach((ma) => console.log(ma.toString()))
-}
+        ipfs.on('ready', () => {
+            logger.debug('IPFS node started.')
+        });
 
-function print (protocol, conn) {
-    pull(
-      conn,
-      pull.map((v) => v.toString()),
-      pull.log()
-    )
-}
-
-// parallel([
-//     (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/10000/ws'], cb),
-//     (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/20000/ws'], cb),
-//   ], (err, nodes) => {
-//     if (err) { throw err }
-  
-//     const node1 = nodes[0]
-//     const node2 = nodes[1]
-  
-//     printAddrs(node1, '1')
-//     printAddrs(node2, '1')
-
-//     node1.on('peer:discovery', (peer) => console.log('Discovered:', peer.id.toB58String()))
-//     node2.on('peer:discovery', (peer) => console.log('Discovered:', peer.id.toB58String()))
-// })
+        ipfs.on('error', (error) => {
+            logger.fatal(error);
+        });
+      }
+    });
+});
 
 parallel([
-    (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/10000/ws'],cb),
-    (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/20000/ws'],cb),
-    // (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/30000/ws'],cb)
+    (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/10000/ws'], cb),
+    (cb) => createNode(['/ip4/0.0.0.0/tcp/0', '/ip4/127.0.0.1/tcp/20000/ws'], cb)
   ], (err, nodes) => {
-    if (err) { throw err }
+    if (err) { logger.fatal(err); }
   
-    const node1 = nodes[0]
-    const node2 = nodes[1]
-    // const node3 = nodes[2]
+    const node1 = nodes[0];
+    const node2 = nodes[1];
+
+    logger.debug('Starting libp2p nodes...');
 
     series([
         (cb) => node1.once('peer:discovery', (peer) => node1.dial(peer, cb)),
         (cb) => setTimeout(cb, 500)
       ], (err) => {
-        if (err) { throw err }
+        if (err) { logger.fatal(err); }
 
-        console.log('start subscribing');
+        logger.debug('P2P Node started, listening for pub/sub...');
     
         // Subscribe to the topic 'news'
         node1.pubsub.subscribe('news',
-          (msg) => console.log(msg.from, msg.data.toString()),
+          (msg) => logger.debug(msg.from, msg.data.toString()),
           () => {
             setInterval(() => {
               // Publish the message on topic 'news'
@@ -81,36 +65,5 @@ parallel([
           }
         )
 
-      })
-    
-  
-    // parallel([
-    //   (cb) => node1.dial(node2.peerInfo, cb),
-    //   (cb) => node2.dial(node3.peerInfo, cb),
-    //   // Set up of the cons might take time
-    //   (cb) => setTimeout(cb, 300)
-    // ], (err) => {
-    //   if (err) { throw err }
-
-    //     const cid = new CID('QmTp9VkYvnHyrqKQuFPiuZkiX9gPcqj6x5LJ1rmWuSySnL')
-
-    //     node1.contentRouting.provide(cid, (err) => {
-    //         if (err) { throw err }
-    
-    //         console.log('Node %s is providing %s', node1.peerInfo.id.toB58String(), cid.toBaseEncodedString())
-    
-    //         node3.contentRouting.findProviders(cid, 5000, (err, providers) => {
-    //         if (err) { throw err }
-    
-    //         console.log('Found provider:', providers[0].id.toB58String())
-    //         })
-    //     })      
-  
-    //     // node1.peerRouting.findPeer(node3.peerInfo.id, (err, peer) => {
-    //     //     if (err) { throw err }
-    
-    //     //     console.log('Found it, multiaddrs are:')
-    //     //     peer.multiaddrs.forEach((ma) => console.log(ma.toString()))
-    //     // })
-    // })
-  })
+      });
+  });
