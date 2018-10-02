@@ -44,7 +44,7 @@ parallel([
 
     series([
         (cb) => node1.once('peer:discovery', (peer) => node1.dial(peer, cb)),
-        (cb) => setTimeout(cb, 500)
+        (cb) => setTimeout(cb, 0)
       ], (err) => {
         if (err) { logger.fatal(err); }
 
