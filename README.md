@@ -4,13 +4,13 @@
 
 <h3 align="center">Filego - A decentralized cloud storage platform.</h3>
 
-Filego 是一个使用 [IPFS](https://ipfs.io), [Authing](https://authing.cn) 和 [Solid](https://solid.inrupt.com) 技术开发的在线网盘。
+Filego 是一个使用 [IPFS](https://ipfs.io), [Authing](https://authing.cn) 和 [Solid](https://solid.inrupt.com) 技术开发的在线网盘。
 
 IPFS 是一个分布式、点对点的文件传输协议（在 Filego 中作为文件传输的基础设施），Authing 是一个身份认证云，Solid 是万维网之父启动的去中心化社交网络项目（在 Filego 中作为计算平台）。
 
 用户将使用 Authing 登录 Filego，同时会拥有 Web ID（在 Solid 网络中的唯一凭证），用户上传文件后获取的 Hash 值将加密存储在 RDF（Solid 的数据存储规范） 中。RDF 是一个语义计算框架，他将数据以三元组的形式存储在 XML 中，方便将所有数据组成一个巨大的知识图谱。
 
-用户上传文件后，Filego 可以根据用户上传的文件名和文件内容自动将文件保存到属于同一个类别的目录下。
+用户上传文件后，Filego 可以根据用户上传的文件名和文件内容自动将文件保存到属于同一个类别的目录下。
 
 ## Filego 想解决的核心问题
 
